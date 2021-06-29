@@ -123,12 +123,14 @@
              upper_ci)
     
     ## p values extracted from model summary
+    ## n number of complete observations extracted from the model frame
     
     model_p <- mod_summary$coefficients[, 4]
     
     est_tibble <- est_tibble %>% 
-      mutate(p_value = unname(model_p))
-    
+      mutate(p_value = unname(model_p), 
+             n_complete = nrow(model.frame(linear_model)))
+
     return(est_tibble)
     
   }
